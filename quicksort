@@ -1,0 +1,55 @@
+#include<iostream>
+using namespace std;
+
+//function for partition
+int partition(int ar[],int low,int high)
+{
+	int i=low;int temp,pivot=high;
+	while(i<pivot)
+	{
+		if(ar[i]>ar[pivot])
+		{	
+			temp=ar[i];
+			ar[i]=ar[pivot-1];
+			ar[pivot-1]=ar[pivot];
+			ar[pivot]=temp;
+			pivot=pivot-1;
+		}
+		
+		else 
+		i++;
+	}
+	return pivot;
+}
+
+//function for quicksort
+void quicksort(int ar[],int low,int high)
+{
+	if (low>=high)
+	return;
+	else
+	{
+		int k = partition(ar,low,high);
+		quicksort(ar,low,k-1);
+		quicksort(ar,k+1,high);
+	}	
+}
+
+//main function
+int main()
+{
+	int ar[10];
+	int n;int i;
+	cout<<"Enter the size of array"<<endl;
+	cin>>n;
+	cout<<endl<<"Enter array elements"<<endl;
+	for(i=0;i<n;i++)
+	cin>>ar[i];
+	cout<<endl;
+	quicksort(ar,0,n-1);
+	cout<<"Finally Sorted Array"<<endl;
+	for(i=0;i<n;i++)
+	cout<<ar[i]<<" ";
+	cout<<endl;
+	return 0;
+}
